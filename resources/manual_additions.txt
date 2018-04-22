@@ -7,4 +7,5 @@
 *.startappnetwork.com
 *.startappservice.com
 *.tsyndicate.com
+*.vkuservideo.net
 adservice.google.co.uk

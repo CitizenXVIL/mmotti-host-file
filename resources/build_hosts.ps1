@@ -2,7 +2,7 @@
 
 # User defined variables
 
-$host_files   = 'http://someonewhocares.org/hosts/hosts/',`
+$host_files   = 'http://someonewhocares.org/hosts/hosts',`
                 'https://goo.gl/bGNWyV' # <-- My manual entries
 $wildcards    = 'https://goo.gl/qwP1iL' # <-- My wildcards
 $regex_file   = 'https://goo.gl/eSj5Uv' # <-- My regex replacement criteria
@@ -34,14 +34,14 @@ foreach($host_list in $host_files)
 
     # Add hosts to the array
 
-    $hosts += (Invoke-WebRequest -Uri $host_list).Content -split '\n'
+    $hosts += (Invoke-WebRequest -Uri $host_list -UseBasicParsing).Content -split '\n'
 }
 
 # Fetch my host file separately
 
 Write-Output "--> Fetching $wildcards"
 
-$mmhosts      = (Invoke-WebRequest -Uri $wildcards).Content -split '\n'
+$mmhosts      = (Invoke-WebRequest -Uri $wildcards -UseBasicParsing).Content -split '\n'
 
 Write-Output '--> Parsing host files'
 
@@ -78,7 +78,7 @@ Write-Output "--> Hosts Detected: $($hosts.count)"
 
 Write-Output "--> Running regex removals (this may take a minute)"
 
-$regex_str    = (Invoke-WebRequest -Uri $regex_file).Content -split '\n'
+$regex_str    = (Invoke-WebRequest -Uri $regex_file -UseBasicParsing).Content -split '\n'
 
 # Loop through each regex and select non-matching items
 
